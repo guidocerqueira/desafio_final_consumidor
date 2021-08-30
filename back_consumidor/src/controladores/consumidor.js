@@ -16,7 +16,7 @@ const cadastrarConsumidor = async (req, res) => {
 
         const senhaCritptografada = await bcrypt.hash(senha, 10);
 
-        const consumidor = await knex('consumidor').insert({ nome, email, senha: senhaCritptografada, telefone }).returning('*');
+        const consumidor = await knex('consumidor').insert({ nome, email, senha: senhaCritptografada, telefone });
 
         if (!consumidor) {
             return res.status(404).json('Usuário não foi cadastrado');

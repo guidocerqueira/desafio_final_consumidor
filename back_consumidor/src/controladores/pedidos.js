@@ -6,25 +6,29 @@ const schemaCadastroPedido = require('../validacoes/schemaCadastroPedido');
 const cadastrarPedidos = async (req, res) => {
     let total = 0;
     let subtotal = 0;
-    let taxa = 0; 
+    let taxa = 0;
     const { consumidor } = req;
-    const { carrinho, restaurante_id, } = req.body;
+    const { cart: carrinho, restaurante_id, } = req.body;
 
-    if (!carrinho) {
+    if (carrinho.length < 0) {
         return res.status(400).json('Carrinho vazio!');
     }
 
+
     try {
-        await schemaCadastroPedido.validate(req.body);
+        // await schemaCadastroPedido.validate(req.body);
 
         const encontrarEndereco = await knex('endereco').where({ consumidor_id: consumidor.id }).first();
-       
+
+
+
+
         if (!encontrarEndereco) {
             return res.status(404).json('Endereco não foi encontrado.');
         }
 
         const encontrarRestaurante = await knex('restaurantes').where({ id: restaurante_id }).first();
-        
+
         if (!encontrarRestaurante) {
             return res.status(404).json('O restaurante não existe.');
         }
@@ -32,16 +36,18 @@ const cadastrarPedidos = async (req, res) => {
         taxa = encontrarRestaurante.taxa_entrega
 
         for (const produto of carrinho) {
-            await schemaCadastroItens.validate(produto);
-
             const conferirProdutos = await knex('produtos')
-            .where({ id: produto.id, nome: produto.nome, preco: produto.preco, restaurante_id, ativo: true }).first();
+                .where({ id: produto.produto_id, nome: produto.nome, preco: produto.preco, restaurante_id, ativo: true }).first();
 
-        if (!conferirProdutos) {
-            return res.status(404).json('Algo deu errado. Os produtos selecionados não existem!');
+            if (!conferirProdutos) {
+                return res.status(400).json('Algo deu errado. Os produtos selecionados não existem!');
+            }
+
+            subtotal = (produto.preco * produto.quantidade) + subtotal;
         }
 
-        subtotal += (produto.preco * produto.quantidade);
+        if (subtotal < encontrarRestaurante.valor_minimo_pedido) {
+            return res.status(404).json('Seu pedido está aquém do valor mínimo!');
         }
 
         total = subtotal + taxa;
@@ -62,8 +68,7 @@ const cadastrarPedidos = async (req, res) => {
         }
 
         for (const produto of carrinho) {
-            produto.produto_id = produto.id;
-            produto.pedidos_id = pedidoId;
+            produto.pedidos_id = pedidoId[0];
 
             const inserirItens = await knex('itens').insert(produto);
 
