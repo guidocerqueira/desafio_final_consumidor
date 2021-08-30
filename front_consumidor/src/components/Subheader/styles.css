@@ -1,0 +1,45 @@
+.sh-base {
+    z-index: 5;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 10vw;
+}
+
+.sh-base div {
+    margin-left: auto;
+}
+
+.sh-base button {
+    margin-right: 2rem;
+}
+
+.sh-detalhes, .sh-detalhes div {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.sh-detalhes{
+    justify-content: space-between;
+}
+
+
+.sh-descricao{
+    position: relative;
+    padding-left: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.sh-detalhes b {
+    font-size: inherit;
+    font-weight: 600;
+    margin: 0 0.5rem;
+}
+
+.sh-detalhes img {
+    margin: 2rem 0.5rem;
+}

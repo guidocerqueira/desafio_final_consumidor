@@ -1,0 +1,36 @@
+.blurry {
+    position: absolute;
+    filter: blur(0.6rem);
+}
+
+.sub-cabecalho {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 18vh;
+}
+
+.sub-cabecalho input {
+    position: relative;
+    z-index: 8;
+    width: 27vw;
+    margin-right: 18vw;
+}
+
+.sub-cabecalho span {
+    display: none;
+    margin-top: 12vh;
+    margin-bottom: 5vh;
+}
+
+.container-produtos {
+    background-color: var(--branco);
+    padding: 8vh 8vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4rem;
+    grid-template-areas: ". ." ". .";
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,32 @@
+.input-search {
+    position: relative;
+}
+
+.search-box{
+    position: absolute;
+    z-index: 13;
+    top: 7vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #BEBEBE;
+    color: var(--cinza-escuro);
+    font-size: 1.6rem;
+    border-radius: 0.7rem;
+    padding: 1rem 0rem;
+    background-color: white;
+    width: 27vw;
+    max-height: 20vh;
+    overflow-y: auto;
+}
+
+.search-itens{
+    color: var(--cinza-escuro);
+    font-size: 1.6rem;
+    padding: 1rem 2.4rem;
+    margin:  0;
+}
+
+.search-itens:hover{
+    background-color: #C9CCD199;
+    cursor: pointer;
+}

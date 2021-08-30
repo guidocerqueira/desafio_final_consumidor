@@ -1,0 +1,162 @@
+.img-produto-modal {
+    width: 100%;
+    height: 35%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.6rem 1.6rem 0rem 0rem;
+}
+
+.logo-modal-borda {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    top: 23vh;
+    right: 5vw;
+    height: 11.6rem;
+    width: 11.6rem;
+    border-radius: 50%;
+    border: solid 0.6rem var(--branco);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.logo-modal {
+    height: 11.6rem;
+    width: auto;
+}
+
+.detalhes-produto {
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 4rem;
+}
+
+.nome-produto {
+    margin-top: 4rem;
+    font-size: 3.6rem;
+    font-weight: 600;
+    color: #525459;
+}
+
+.dados-restaurante {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    gap: 1rem;
+    color: #525459;
+}
+
+.dados-restaurante b {
+    font-size: inherit;
+    font-weight: 600;
+    color: inherit;
+}
+
+.dados-produto {
+    display: flex;
+}
+
+.dados-coluna {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #525459;
+}
+
+.dados-carrinho {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.preco-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.4rem;
+    padding: 1.2rem 3.9rem;
+    color: #006335;
+    background-color: #0d8a5010;
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.modal-special {
+    background-color: var(--laranja-intenso);
+    color: var(--branco);
+    font-size: 2.2rem;
+    padding: 0.7rem 1rem;
+}
+
+.quantidade-produto {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.modal-special:hover {
+    background-color: var(--laranja-escuro);
+}
+
+.modal-special:disabled {
+    background-color: var(--cinza);
+    color: var(--cinza-azulado);
+}
+
+.plus {
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+    margin-left: 3rem;
+}
+
+.minus {
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    margin-right: 3rem;
+}
+
+.dados-carrinho .aceitar {
+    margin-left: 8rem;
+}
+
+.fechar {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    background-color: black;
+    border: 0.4rem solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.link-revisao {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #525459;
+    text-decoration: underline;
+}
+
+.pedido-adicionado{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8.5rem;
+}
+
+.pedido-adicionado span {
+    font-size: 2.0rem;
+    font-weight: 600;
+    color: #525459;
+}
