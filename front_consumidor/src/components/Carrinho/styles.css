@@ -55,7 +55,7 @@
     flex-direction: column;
     gap: 0.5rem;
     overflow-y: auto;
-    height: 22vh;
+    height: 18vh;
 }
 
 .mini-card {

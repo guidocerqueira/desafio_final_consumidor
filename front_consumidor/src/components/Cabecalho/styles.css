@@ -20,10 +20,20 @@
 }
 
 .dash-barril-logo{
+    display:flex;
     position: absolute;
     top: 4vh;
     right: 6vw;
     width: 17vw;
+    border: solid 1.2rem white;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.dash-barril-logo img {
+    align-self: center;
+    width: 20vw;
+    height: 10vh;
 }
 
 .avatar-borda {
@@ -57,7 +67,9 @@
 }
 
 .botao-logout{
-    margin-left: 37vw;
+    position: absolute;
+    top: 6vh;
+    left: 57vw;
     color: var(--branco);
     background-color: transparent;
     font-size: 1.6rem;

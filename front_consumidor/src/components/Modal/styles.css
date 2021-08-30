@@ -13,9 +13,9 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
-    top: 23vh;
-    right: 5vw;
-    height: 11.6rem;
+    top: 18vh;
+    right: 4vw;
+    min-height: 11.6rem;
     width: 11.6rem;
     border-radius: 50%;
     border: solid 0.6rem var(--branco);
@@ -24,8 +24,8 @@
 }
 
 .logo-modal {
-    height: 11.6rem;
-    width: auto;
+    height: 10.6rem;
+    width: 10.6rem;
 }
 
 .detalhes-produto {
@@ -145,6 +145,7 @@
     cursor: pointer;
     color: #525459;
     text-decoration: underline;
+    margin-bottom: 2rem;
 }
 
 .pedido-adicionado{

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-import { get, post } from '../../services/ApiClient';
+import { get } from '../../services/ApiClient';
 import useAuth from '../../hooks/useAuth';
 import './styles.css';
 import Carrinho from '../../components/Carrinho';
@@ -9,6 +9,7 @@ import Card from '../../components/Card';
 import Modal from '../../components/Modal';
 import Subheader from '../../components/Subheader';
 import InputBusca from '../../components/InputBusca';
+import IconVazio from '../../assets/vazio.svg';
 import Cabecalho from '../../components/Cabecalho';
 import Snackbar from '../../components/Snackbar';
 import ModalEndereco from '../../components/ModalEndereco';
@@ -26,7 +27,6 @@ export default function Dashboard() {
   const [abrirEndereco, setAbrirEndereco] = useState(false);
 
   const [selecionado, setSelecionado] = useState(''); //guardará os dados do restaurante
-  const [carrinho, setCarrinho] = useState([]);
   const [produto, setProduto] = useState('');
   const [itens, setItens] = useState('');
 
@@ -66,7 +66,7 @@ export default function Dashboard() {
     if (item.taxa_entrega) {
       setBusca('')
       let produtos = [];
-      let idProdutos =[];
+      let idProdutos = [];
       setSelecionado(item);
       try {
         const resposta = await get(`restaurantes/${item.id}`, token)
@@ -78,8 +78,8 @@ export default function Dashboard() {
           produto.ativo && idProdutos.push(produto.id)
         })
 
-        if(cart.length > 0){
-          if(!idProdutos.find((id)=> id === cart[0].produto_id)){
+        if (cart.length > 0) {
+          if (!idProdutos.find((id) => id === cart[0].produto_id)) {
             limparCarrinho();
           }
         }
@@ -89,6 +89,9 @@ export default function Dashboard() {
         setOpenSnack(true);
       }
       setItens(produtos)
+      if (itens.length === 0) {
+        setItens('')
+      }
     }
     else if (item.preco) {
       setProduto(item);
@@ -135,16 +138,21 @@ export default function Dashboard() {
           </form>
         )}
       </div>
-      <div className="container-produtos">
+      <div className={`container-produtos ${itens ?? 'ocultar'}`}>
         {itens && itens.map((item) =>
           <Card
             key={item.nome}
             item={item}
             onClick={selecionarItem}
           />
-        )
-        }
+        )}
       </div>
+      {itens.length < 1 && (
+        <div className="container-vazio">
+          <img src={IconVazio} alt='carrinho vazio'></img>
+          <span>Desculpe, estamos sem produtos ativos</span>
+        </div>
+      )}
       <Snackbar
         mensagem={mensagem}
         openSnack={openSnack}
