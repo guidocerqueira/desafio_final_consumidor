@@ -71,7 +71,7 @@ export default function ModalEndereco({ abrirEndereco, setAbrirEndereco, setAbri
                                 <button
                                     onClick={() => voltar()}
                                     className="aceitar centraliza topzera">
-                                    Voltar ao cardápio
+                                    Voltar ao pedido
                                 </button>
                             </div>
                         </div>

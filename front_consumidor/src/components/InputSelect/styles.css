@@ -4,18 +4,14 @@
 
 .input-select button{
     all: unset;
-    width:100%;
     cursor: pointer;
 }
 
 .input-select button:focus{
-    border: 2px solid black;
-    border-radius: 0.7rem;
-    box-sizing: border-box;
+    border: none
 }
 
 .input-select input{
-    width:100%;
     cursor: pointer;
 }
 
@@ -26,9 +22,9 @@
 
 .select-seta {
     position: absolute;
-    top: 4.1rem;
-    right: 1.5rem;
-    z-index: 4;
+    top: 2.2rem;
+    left: 34rem;
+    z-index: 10;
     cursor: pointer;
 }
 
@@ -39,7 +35,7 @@
 .select-drop{
     position: absolute;
     z-index: 13;
-    top: 12vh;
+    top: 8vh;
     display: flex;
     flex-direction: column;
     border: 1px solid #BEBEBE;
@@ -48,7 +44,7 @@
     border-radius: 0.7rem;
     padding: 1rem 0rem;
     background-color: white;
-    width: 27.4vw;
+    width: 27vw;
     max-height: 20vh;
     overflow-y: auto;
 }

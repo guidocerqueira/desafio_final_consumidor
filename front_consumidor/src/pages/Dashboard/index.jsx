@@ -8,6 +8,7 @@ import Carrinho from '../../components/Carrinho';
 import Card from '../../components/Card';
 import Modal from '../../components/Modal';
 import Subheader from '../../components/Subheader';
+import InputSelect from '../../components/InputSelect';
 import InputBusca from '../../components/InputBusca';
 import IconVazio from '../../assets/vazio.svg';
 import Cabecalho from '../../components/Cabecalho';
@@ -20,6 +21,7 @@ export default function Dashboard() {
   const { limparCarrinho, cart } = useCart();
 
   const [busca, setBusca] = useState('');
+  const [filtro, setFiltro] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [openSnack, setOpenSnack] = useState(false);
   const [abrirModal, setAbrirModal] = useState(false);
@@ -30,9 +32,10 @@ export default function Dashboard() {
   const [produto, setProduto] = useState('');
   const [itens, setItens] = useState('');
 
-  async function buscarRestaurantes(busca) {
+  async function buscarRestaurantes(busca, filtro) {
     try {
-      const resposta = await get(`restaurantes/?busca=${busca}`, token)
+      const url = `restaurantes/?busca=${busca}&categoriaId=${filtro.id}`
+      const resposta = await get(url, token)
 
       const lista = await resposta.json();
 
@@ -44,25 +47,27 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    buscarRestaurantes(busca)
-  }, [busca])
+    buscarRestaurantes(busca, filtro)
+  }, [busca, filtro])
 
 
   function retornar() {
+    setFiltro('');
     setBusca('');
     setMensagem('');
     setOpenSnack(false);
     setAbrirModal(false);
     setAbrirCart(false);
     setAbrirEndereco(false);
-    setSelecionado(''); //guardará os dados do restaurante
+    setSelecionado('')
     setProduto('');
     setItens('');
     buscarRestaurantes(busca);
+    setMensagem('');
+    setOpenSnack(false);
   }
 
   async function selecionarItem(item) {
-    //se for restaurante(gambiarra)
     if (item.taxa_entrega) {
       setBusca('')
       let produtos = [];
@@ -118,6 +123,7 @@ export default function Dashboard() {
         abrirCart={abrirCart}
         setAbrirCart={setAbrirCart}
         setAbrirEndereco={setAbrirEndereco}
+        setAbrirModal={setAbrirModal}
       />
       <Cabecalho
         restaurante={selecionado}
@@ -135,6 +141,11 @@ export default function Dashboard() {
               value={busca}
               setValue={setBusca}
             />
+            <InputSelect
+              placeholder="Selecione a categoria"
+              value={filtro}
+              setValue={setFiltro}
+            />
           </form>
         )}
       </div>
@@ -150,7 +161,7 @@ export default function Dashboard() {
       {itens.length < 1 && (
         <div className="container-vazio">
           <img src={IconVazio} alt='carrinho vazio'></img>
-          <span>Desculpe, estamos sem produtos ativos</span>
+          <span>Desculpe, {selecionado ? 'estamos sem produtos ativos' : 'não há restaurantes ativos na sua região'}</span>
         </div>
       )}
       <Snackbar

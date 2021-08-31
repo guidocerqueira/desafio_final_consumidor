@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import './styles.css';
-import Avatar from '../../assets/avatar.png';
+import Avatar from '../../assets/avatar.jpg';
 import Illustration from '../../assets/illustration-3.svg';
 import HeadImagem from '../../assets/bg-pizzaria.png';
 import BarriLogo from '../../assets/barril-logo.png';

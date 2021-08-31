@@ -1,13 +1,33 @@
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
+import { get } from '../../services/ApiClient';
 import SetaSelect from '../../assets/select-seta.svg';
-import categorias from '../../assets/categorias';
 
 export default function InputSelect({
   label, placeholder, value, setValue,
 }) {
   const [drop, setDrop] = useState(false);
+  const [categorias, setCategorias] = useState([]);
+
+  async function listarCategorias() {
+    try {
+      const resposta = await get('categorias');
+      const arrayCategorias = await resposta.json();
+      arrayCategorias.push({
+        id: '',
+        nome: "Todas as categorias"
+      });
+      setCategorias(arrayCategorias.reverse());
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    listarCategorias();
+  }, []);
 
   function ativarDrop() {
     setDrop(!drop);
@@ -29,27 +49,27 @@ export default function InputSelect({
           id="select"
           type="text"
           placeholder={placeholder}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={value.nome}
+          onChange={(e) => setValue(e.target.value.nome)}
           disabled
         />
       </button>
 
-      { drop && (
+      {drop && (
         <div className="select-drop">
           {
-          categorias.map((item) => (
-            <>
-              <div
-                key={item}
-                className="drop-itens"
-                onClick={() => selecionarCategoria(item)}
-              >
-                {item}
-              </div>
-            </>
-          ))
-        }
+            categorias.map((item) => (
+              <>
+                <div
+                  key={item.nome}
+                  className="drop-itens"
+                  onClick={() => selecionarCategoria(item)}
+                >
+                  {item.nome}
+                </div>
+              </>
+            ))
+          }
         </div>
       )}
       <img
