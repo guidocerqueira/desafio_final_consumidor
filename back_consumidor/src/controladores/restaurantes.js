@@ -2,12 +2,20 @@ const knex = require('../conexao');
 
 const listarRestaurantes = async (req, res) => {
     const { busca } = req.query
+    const categoriaId = Number(req.query.categoriaId)
     let restaurantes = '';
+
     try {
         const categorias = await knex('categorias');
 
-        restaurantes = await knex('restaurantes')
+        if(categoriaId){
+            restaurantes = await knex('restaurantes')
+            .where('restaurantes.nome', 'ilike', `%${busca}%`)
+            .andWhere('restaurantes.categoria_id', '=', categoriaId);
+        } else{
+            restaurantes = await knex('restaurantes')
             .where('restaurantes.nome', 'ilike', `%${busca}%`);
+        }
 
         restaurantes.map(restaurante => {
             categorias.find(categoria => {

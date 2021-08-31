@@ -40,7 +40,7 @@ const cadastrarPedidos = async (req, res) => {
                 .where({ id: produto.produto_id, nome: produto.nome, preco: produto.preco, restaurante_id, ativo: true }).first();
 
             if (!conferirProdutos) {
-                return res.status(400).json('Algo deu errado. Os produtos selecionados não existem!');
+                return res.status(400).json(`O produto ${produto.nome} não se encontra mais disponível.`);
             }
 
             subtotal = (produto.preco * produto.quantidade) + subtotal;

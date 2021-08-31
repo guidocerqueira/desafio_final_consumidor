@@ -1,5 +1,6 @@
 const express = require('express');
 const cadastrarConsumidor = require('./controladores/consumidor');
+const { listarCategorias } = require('./controladores/categoria');
 const { listarRestaurantes, listarProdutosRestaurantes } = require('./controladores/restaurantes');
 const { login } = require('./controladores/login');
 const verificarLogin = require('./filtros/verificarLogin');
@@ -13,6 +14,9 @@ rotas.post('/consumidor', cadastrarConsumidor)
 
 // LOGIN
 rotas.post('/login', login);
+
+// CATEGORIAS 
+rotas.get('/categorias', listarCategorias);
 
 // MIDDLEWARE QUE VERIFICA LOGIN
 rotas.use(verificarLogin);
